@@ -105,6 +105,13 @@ class bacula::params {
       $bacula_user              = '_bacula'
       $bacula_group             = '_bacula'
     }
+    'Windows': {
+      $client_name		= "%{hiera('client_name')}"
+      $client_addr		= "%{hiera('client_addr')}"
+      $client_port		= "%{hiera('client_port')}"
+      $client_catalog           = "%{hiera('client_catalog')}"
+      $client_pw		= "%{hiera('client_pw')}"
+    }
     default: { fail("bacula::params has no love for ${facts['operatingsystem']}") }
   }
 

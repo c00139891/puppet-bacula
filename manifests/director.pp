@@ -15,14 +15,14 @@
 #   }
 #
 class bacula::director (
-  $port                = '9101',
+  $port                = hiera('dir_port'),
   $listen_address      = $::ipaddress,
   $db_user             = $bacula::params::bacula_user,
-  $db_pw               = 'notverysecret',
+  $db_pw               = hiera('dir_db_pw'),
   $db_name             = $bacula::params::bacula_user,
   $db_type             = $bacula::params::db_type,
-  $password            = 'secret',
-  $max_concurrent_jobs = '20',
+  $password            = hiera('dir_pw'),
+  $max_concurrent_jobs = hiera('max_jobs'),
   $packages            = $bacula::params::bacula_director_packages,
   $services            = $bacula::params::bacula_director_services,
   $homedir             = $bacula::params::homedir,
