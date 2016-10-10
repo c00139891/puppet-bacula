@@ -111,6 +111,12 @@ class bacula::params {
       $client_port		= "%{hiera('client_port')}"
       $client_catalog           = "%{hiera('client_catalog')}"
       $client_pw		= "%{hiera('client_pw')}"
+      $client_working_path	= "%{hiera('client_working_path')}"
+      $client_pid_path		= "%{hiera('client_pid_path')}"
+      $client_plugin_path	= "%{hiera('client_plugin_path')}"
+      $bacula_client_packages	= 'bacula_win_client'
+      $bacula_client_services   = 'bacula_fd'
+      $client_conf		= "%{hiera('client_conf')}"
     }
     default: { fail("bacula::params has no love for ${facts['operatingsystem']}") }
   }

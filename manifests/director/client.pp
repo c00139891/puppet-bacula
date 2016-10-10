@@ -1,7 +1,7 @@
 define bacula::director::client (
-  $port           = '9102',
+  $port           = "%{hiera('client_port')}",
   $client         = $::fqdn,
-  $password       = 'secret',
+  $password       = "%{hiera('client_pw')}",
   $conf_dir       = $bacula::params::conf_dir, # Overridden at realize
   $file_retention = $bacula::params::file_retention,
   $job_retention  = $bacula::params::job_retention,
