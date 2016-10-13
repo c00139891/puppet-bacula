@@ -28,34 +28,51 @@ class bacula::client (
   include bacula::common
   include bacula::ssl
 
-  package { $packages:
-    ensure => present,
+  if $facts['operatingsystem'] == 'Windows' {
+    file { "c:\\Users\administrator.DOTMOBI\Downloads\bacula-win32-5.2.10.exe":
+      ensure => present,
+      source => "puppet:///modules/windows_client/bacula-win32.exe",
+      notify => Package["win-client"],
+    }
+    package { "win-client":
+      ensure => installed,
+      source => "c:\\Users\amiller.DOTMOBI\Downloads\bacula-win32-5.2.10.exe",
+      require => File["c:\\Users\administrator.DOTMOBI\Downloads\bacula-win32-5.2.10.exe"],
+      install_options => ['/VERYSILENT','/SUPPRESSMSGBOXES','/LOG'],
+    }
   }
 
-  service { $services:
-    ensure    => running,
-    enable    => true,
-    subscribe => File[$bacula::ssl::ssl_files],
-    require   => Package[$packages],
-  }
+  else {
 
-  concat { $client_config:
-    owner   => 'root',
-    group   => $group,
-    mode    => '0640',
-    require => Package[$bacula::params::bacula_client_packages],
-    notify  => Service[$bacula::params::bacula_client_services],
-  }
+    package { $packages:
+      ensure => present,
+    }
 
-  concat::fragment { 'bacula-client-header':
-    target  => $client_config,
-    content => template('bacula/bacula-fd-header.erb'),
-  }
+    service { $services:
+      ensure    => running,
+      enable    => true,
+      subscribe => File[$bacula::ssl::ssl_files],
+      require   => Package[$packages],
+    }
 
-  bacula::messages { 'Standard-fd':
-    daemon   => 'fd',
-    director => "${director}-dir = all, !skipped, !restored",
-    append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
+    concat { $client_config:
+      owner   => 'root',
+      group   => $group,
+      mode    => '0640',
+      require => Package[$bacula::params::bacula_client_packages],
+      notify  => Service[$bacula::params::bacula_client_services],
+    }
+
+    concat::fragment { 'bacula-client-header':
+      target  => $client_config,
+      content => template('bacula/bacula-fd-header.erb'),
+    }
+
+    bacula::messages { 'Standard-fd':
+      daemon   => 'fd',
+      director => "${director}-dir = all, !skipped, !restored",
+      append   => '"/var/log/bacula/bacula-fd.log" = all, !skipped',
+    }
   }
 
   # Tell the director about this client config
@@ -65,4 +82,4 @@ class bacula::client (
     password => $password,
     tag      => "bacula-${::bacula::params::director}",
   }
-}:w
+}
