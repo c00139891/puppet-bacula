@@ -105,7 +105,7 @@ class bacula::params {
       $bacula_user              = '_bacula'
       $bacula_group             = '_bacula'
     }
-    'Windows': {
+    'windows': {
       $client_name		= "%{hiera('client_name')}"
       $client_addr		= "%{hiera('client_addr')}"
       $client_port		= "%{hiera('client_port')}"
