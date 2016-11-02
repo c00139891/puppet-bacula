@@ -10,6 +10,13 @@ class bacula::params {
   $monitor        = true
   $ssl            = hiera('bacula::params::ssl', false)
   $ssl_dir        = hiera('bacula::params::ssl_dir', '/etc/puppetlabs/puppet/ssl')
+  $dir_port       = hiera('bacula::params::dir_port')
+  $dir_pw         = hiera('bacula::params::dir_pw')
+  $max_jobs       = hiera('bacula::params::max_jobs')
+  $fd_port        = hiera('bacula::params::fd_port')
+  $fd_pw          = hiera('bacula::params::fd_pw')
+  $sd_port        = hiera('bacula::params::sd_port')
+  $sd_pw          = hiera('bacula::params::sd_pw')
 
   validate_bool($ssl)
 
