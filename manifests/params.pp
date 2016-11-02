@@ -17,6 +17,7 @@ class bacula::params {
   $fd_pw          = hiera('bacula::params::fd_pw')
   $sd_port        = hiera('bacula::params::sd_port')
   $sd_pw          = hiera('bacula::params::sd_pw')
+  $db_pw          = hiera('bacula::params::db_pw')
 
   validate_bool($ssl)
 

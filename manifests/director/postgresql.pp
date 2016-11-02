@@ -10,7 +10,7 @@
 class bacula::director::postgresql(
   String $make_bacula_tables = '',
   String $db_name            = $bacula::director::db_name,
-  String $db_pw              = $bacula::director::db_pw,
+  String $db_pw              = $bacula::params::db_pw,
   String $db_user            = $bacula::director::db_user,
   Array $services            = $bacula::params::bacula_director_services,
   String $user               = $bacula::params::bacula_user,
