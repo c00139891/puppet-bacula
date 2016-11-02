@@ -7,10 +7,10 @@
 #   class { 'bacula::client': director => 'mydirector.example.com' }
 #
 class bacula::client (
-  $port                = hiera('fd_port'),
+  $port                = $bacula::params::fd_port,
   $listen_address      = $::ipaddress,
-  $password            = hiera('fd_pw'),
-  $max_concurrent_jobs = hiera('max_jobs'),
+  $password            = $bacula::params::fd_pw,
+  $max_concurrent_jobs = $bacula::params::max_jobs,
   $packages            = $bacula::params::bacula_client_packages,
   $services            = $bacula::params::bacula_client_services,
   $conf_dir            = $bacula::params::conf_dir,

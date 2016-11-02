@@ -3,10 +3,10 @@
 # Configures bacula storage daemon
 #
 class bacula::storage (
-  $port                    = '9103',
+  $port                    = $bacula::params::sd_port,
   $listen_address          = $::ipaddress,
   $storage                 = $::fqdn, # storage here is not params::storage
-  $password                = 'secret',
+  $password                = $bacula::params::sd_pw,
   $device_name             = "${::fqdn}-device",
   $device                  = '/bacula',
   $device_mode             = '0770',
