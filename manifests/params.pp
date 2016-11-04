@@ -97,6 +97,14 @@ class bacula::params {
       $homedir                  = '/var/db/bacula'
       $bacula_user              = 'bacula'
       $bacula_group             = 'bacula'
+      $webacula_conf            = '/usr/local/etc/httpd/conf.d/webacula.conf'
+      $webacula_dir             = '/usr/share/webacula/html'
+      $webacula_user_auth       = "/usr/local/etc/httpd/conf/webacula.users"
+      $webacula_index           = "/usr/share/webacula/html/index.php"
+      $webacula_pkgs            = [
+                                   'webacula',
+                                   'php-ZendFramework-Db-Adapter-Pdo-Mysql',
+                                  ]
     }
     'OpenBSD': {
       $bacula_director_packages = [ 'bacula-server', "bacula-${db_type}" ]
