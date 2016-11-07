@@ -23,9 +23,8 @@ class bacula::client (
   $default_pool_full   = undef,
   $default_pool_inc    = undef,
   $default_pool_diff   = undef,
-) {
+) inherit bacula::params {
 
-  include bacula::params
   include bacula::common
   include bacula::ssl
 
