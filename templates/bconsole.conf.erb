@@ -5,8 +5,8 @@
 Director {
     Name     = <%= @director %>
     DIRport  = <%= @port %>
-    address  = <%= @director_address %>
-    Password = "<%= @password %>"
+    address  = <%= @director %>
+    Password = $bacula::params::dir_pw 
 <%= scope.function_template(['bacula/_ssl.erb']) %>
 <%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 }
