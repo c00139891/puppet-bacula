@@ -6,7 +6,7 @@ Director {
     Name     = <%= @director %>
     DIRport  = <%= @port %>
     address  = <%= @director %>
-    Password = $bacula::params::dir_pw 
+    Password = hiera('$bacula::params::dir_pw')
 <%= scope.function_template(['bacula/_ssl.erb']) %>
 <%= scope.function_template(['bacula/_sslkeypair.erb']) %>
 }
